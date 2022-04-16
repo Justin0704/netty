@@ -11,4 +11,3 @@ netty - 学习 - 代码切换到master分支
 
 5、一个EventLoop可能会被分配给一个或多个Channel
 
-![eventloop](https://user-images.githubusercontent.com/23186519/163663595-b213de23-44cd-4c5a-b452-d041debeaadf.png)
