@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class DelimiterEchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     private AtomicInteger counter = new AtomicInteger(0);
+
     /**
      * 客户端被通知channel活跃后，dosomething
      * @param ctx
