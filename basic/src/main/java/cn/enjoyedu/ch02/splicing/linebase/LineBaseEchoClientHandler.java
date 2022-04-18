@@ -11,19 +11,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class LineBaseEchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private AtomicInteger counter = new AtomicInteger(0);
-
-    /**
-     * 客户端读取到网络数据后处理
-     * @param channelHandlerContext
-     * @param byteBuf
-     * @throws Exception
-     */
-    @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
-        System.out.println("Client accept[" + byteBuf.toString(CharsetUtil.UTF_8) + "] and the counter is " + counter.incrementAndGet());
-        channelHandlerContext.close();
-    }
-
     /**
      * 客户端被通知channel活跃后，dosomething
      * @param ctx
@@ -41,7 +28,17 @@ public class LineBaseEchoClientHandler extends SimpleChannelInboundHandler<ByteB
             ctx.writeAndFlush(byteBuf);
         }
     }
-
+    /**
+     * 客户端读取到网络数据后处理
+     * @param channelHandlerContext
+     * @param byteBuf
+     * @throws Exception
+     */
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
+        System.out.println("Client accept[" + byteBuf.toString(CharsetUtil.UTF_8) + "] and the counter is " + counter.incrementAndGet());
+        channelHandlerContext.close();
+    }
     /**
      * 发生异常后的处理
      * @param ctx
