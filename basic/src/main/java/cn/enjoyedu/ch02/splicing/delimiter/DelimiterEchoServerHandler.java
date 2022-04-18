@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DelimiterEchoServerHandler extends ChannelInboundHandlerAdapter {
 
     private AtomicInteger counter = new AtomicInteger(0);
+    private AtomicInteger completeCounter = new AtomicInteger(0);
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -35,6 +36,8 @@ public class DelimiterEchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         System.out.println("服务器端 - channelReadComplete");
+        ctx.fireChannelReadComplete();
+        System.out.println("the read complete count is " + completeCounter.incrementAndGet());
     }
 
     /**

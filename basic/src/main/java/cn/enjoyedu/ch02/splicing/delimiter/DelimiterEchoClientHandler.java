@@ -18,8 +18,9 @@ public class DelimiterEchoClientHandler extends SimpleChannelInboundHandler<Byte
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端 - channelActive");
         ByteBuf byteBuf;
-        String request = "Hello, i am leaning netty, it's hard to programming" + DelimiterEchoServer.DELIMITER_SYMBOL;
+        String request = "Hello, i am leaning netty, it's hard to programming " + DelimiterEchoServer.DELIMITER_SYMBOL;
         for(int i = 0; i < 10; i++){
             Thread.sleep(500);
             System.out.println("即将发送数据：" + request);
@@ -37,6 +38,7 @@ public class DelimiterEchoClientHandler extends SimpleChannelInboundHandler<Byte
      */
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
+        System.out.println("客户端 - channelRead0");
         System.out.println("Client accept[" + byteBuf.toString(CharsetUtil.UTF_8) + "] and the counter is " + counter.incrementAndGet());
         channelHandlerContext.close();
     }
@@ -49,6 +51,8 @@ public class DelimiterEchoClientHandler extends SimpleChannelInboundHandler<Byte
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("客户端 - exceptionCaught");
         super.exceptionCaught(ctx, cause);
+        ctx.close();
     }
 }
