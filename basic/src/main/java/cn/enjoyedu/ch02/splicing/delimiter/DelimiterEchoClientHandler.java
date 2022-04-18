@@ -19,7 +19,7 @@ public class DelimiterEchoClientHandler extends SimpleChannelInboundHandler<Byte
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         ByteBuf byteBuf;
-        String request = "Hello, i am leaning netty, it's hard to programming" + System.getProperty("line.separator");
+        String request = "Hello, i am leaning netty, it's hard to programming" + DelimiterEchoServer.DELIMITER_SYMBOL;
         for(int i = 0; i < 10; i++){
             Thread.sleep(500);
             System.out.println("即将发送数据：" + request);

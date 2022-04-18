@@ -1,12 +1,15 @@
 package cn.enjoyedu.ch02.splicing.delimiter;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 
 import java.net.InetSocketAddress;
 
@@ -39,6 +42,8 @@ public class DelimiterEchoClient {
     private static class ChannelInitializeImpl extends ChannelInitializer<Channel>{
         @Override
         protected void initChannel(Channel channel) throws Exception {
+            ByteBuf delimiter = Unpooled.copiedBuffer(DelimiterEchoServer.DELIMITER_SYMBOL.getBytes());
+            channel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
             channel.pipeline().addLast(new DelimiterEchoClientHandler());
         }
     }

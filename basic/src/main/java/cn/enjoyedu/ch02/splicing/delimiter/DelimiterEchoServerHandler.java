@@ -27,7 +27,7 @@ public class DelimiterEchoServerHandler extends ChannelInboundHandlerAdapter {
         String request = byteBuf.toString(CharsetUtil.UTF_8);
         System.out.println("Server Accept [" + request + "] and counter is: " + counter.incrementAndGet());
         //服务器的应答也要添加一个回车换行符
-        String resp = "Hello, " + request + ". Welcome to netty world!" + System.getProperty("line.separator");
+        String resp = "Hello, " + request + ". Welcome to netty world!" + DelimiterEchoServer.DELIMITER_SYMBOL;
         ctx.writeAndFlush(Unpooled.copiedBuffer(resp.getBytes()));
     }
 

@@ -1,7 +1,5 @@
 package cn.enjoyedu.ch02.splicing.delimiter;
 
-import cn.enjoyedu.ch02.splicing.linebase.LineBaseEchoServer;
-import cn.enjoyedu.ch02.splicing.linebase.LineBaseEchoServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -14,6 +12,9 @@ import io.netty.handler.codec.LineBasedFrameDecoder;
 import java.net.InetSocketAddress;
 
 public class DelimiterEchoServer {
+
+    public static final String DELIMITER_SYMBOL = "@~";
+
     private final int port;
 
     public DelimiterEchoServer(int port){
@@ -52,7 +53,7 @@ public class DelimiterEchoServer {
              * 然后再交给下一个handler处理
              */
             channel.pipeline().addLast(new LineBasedFrameDecoder(1024));
-            channel.pipeline().addLast(new LineBaseEchoServerHandler());
+            channel.pipeline().addLast(new DelimiterEchoServerHandler());
         }
     }
     public static void main(String[] args) throws InterruptedException {
