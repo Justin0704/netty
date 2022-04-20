@@ -22,6 +22,7 @@
     </build>
     <modules>
         <module>basic</module>
+        <module>stomp</module>
     </modules>
     <dependencies>
         <dependency>
