@@ -26,6 +26,12 @@ public class WebsocketController {
         return "ok";
     }
 
+    /**
+     * 指定会话id发消息
+     * @param message
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/sendOne", method = RequestMethod.GET)
     public String sendOneMessage(@RequestParam String message, @RequestParam String id){
         try {
