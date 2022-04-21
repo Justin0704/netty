@@ -23,6 +23,8 @@
     <modules>
         <module>basic</module>
         <module>stomp</module>
+        <module>websocket</module>
+        <module>netty-websocket</module>
     </modules>
     <dependencies>
         <dependency>
