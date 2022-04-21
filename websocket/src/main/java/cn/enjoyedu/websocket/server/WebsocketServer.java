@@ -26,7 +26,7 @@ public class WebsocketServer {
     public void onOpen(Session session){
         sessionSet.add(session);
         int cnt = onlineCount.incrementAndGet();//在线数+1
-        logger.info("有连接加入，当前连接数为：{}", cnt);
+        logger.info("有连接加入，当前连接数为：{}，sessionIdd = {}", cnt, session.getId());
         sendMessage(session, "连接成功");
     }
 
@@ -38,7 +38,7 @@ public class WebsocketServer {
     public void onClose(Session session){
         sessionSet.remove(session);
         int cnt = onlineCount.decrementAndGet();
-        logger.info("有连接关闭，当前连接数量为：{}", cnt);
+        logger.info("有连接关闭，当前连接数量为：{}, sessionId = {}", cnt, session.getId());
     }
 
     /**
@@ -67,6 +67,7 @@ public class WebsocketServer {
     private static void sendMessage(Session session, String message) {
         try {
             session.getBasicRemote().sendText(String.format("%s (From Server，Session ID=%s)", message, session.getId()));
+            logger.info("发送消息方法，message = {}， sessionId = {}", message, session.getId());
         } catch (IOException e) {
             logger.error("发送消磁出错：{}", e.getMessage());
             e.printStackTrace();
