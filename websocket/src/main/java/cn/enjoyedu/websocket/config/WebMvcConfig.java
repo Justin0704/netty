@@ -9,6 +9,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/ws").setViewName("/ws");
+        //registry.addViewController("/ws").setViewName("/ws");
+        registry.addViewController("/ws").setViewName("/ws_chatroom");
     }
 }
